@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--注意导入命名空间 P 的约束-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:contest="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="person" name="p" class="indi.mofan.domain.Person">
+        <property name="name" value="yang"/>
+    </bean>
+
+    <bean id="user" class="indi.mofan.domain.User" p:username="mofan" p:person-ref="person"/>
+
+<!--    <bean id="product" class="indi.mofan.life.Product" lazy-init="true"/>-->
+    <bean id="product" class="indi.mofan.life.Product" init-method="myInitMethod" destroy-method="myDestroyMethod">
+        <property name="name" value="mofan"/>
+    </bean>
+
+
+    <contest:annotation-config/>
+    <contest:component-scan base-package="indi.mofan"/>
+
+</beans>

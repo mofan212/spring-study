@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="indi.mofan.proxy.UserServiceImpl"/>
+
+    <bean id="orderService" class="indi.mofan.proxy.OrderServiceImpl"/>
+
+<!--    <bean id="before" class="indi.mofan.dynamic.Before"/>-->
+
+    <bean id="around" class="indi.mofan.dynamic.Around"/>
+
+    <aop:config>
+        <!--   所有方法都作为切入点加入额外功能   -->
+        <aop:pointcut id="pc" expression="execution(* *(..))"/>
+
+        <!--   组装  -->
+        <aop:advisor advice-ref="around" pointcut-ref="pc"/>
+    </aop:config>
+
+</beans>
